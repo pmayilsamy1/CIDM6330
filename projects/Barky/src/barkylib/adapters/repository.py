@@ -113,13 +113,13 @@ class SqlAlchemyRepository(AbstractRepository):
         return bookmark
 
     def update(self, bookmark) -> int:
-        pass
+        return self.session.query(bookmark).update({bookmark.url},synchronize_session = False)
 
     def update_many(self, bookmarks) -> int:
-        pass
+        return self.session.query(bookmarks).update({bookmarks},synchronize_session = False)
 
     def find_first(self, query) -> Bookmark:
-        pass
+        return self.session.execute(query).first()
 
     def find_all(self, query) -> list[Bookmark]:
-        pass
+        return self.session.execute(query)
